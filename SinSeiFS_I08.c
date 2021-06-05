@@ -194,6 +194,10 @@ void loopAllEnc1(char *str, int flag)
 	}
 }
 
+
+
+
+
 void encrypt1(char *str, int flag)
 {
 	struct stat add;
@@ -201,7 +205,6 @@ void encrypt1(char *str, int flag)
 	if(!S_ISDIR(add.st_mode)) return;
 	loopAllEnc1(str, flag);
 }
-
 
 
 
@@ -302,7 +305,7 @@ static int xmp_mkdir(const char *path, mode_t mode)
 	{
 		encrypt1(fpath, 1);	
 	}
-	writeI("mkdir", fpath);
+	writeW("mkdir", fpath);
 	return 0;
 }
 
@@ -429,7 +432,7 @@ static int xmp_chmod(const char *path, mode_t mode)
 	int res;
 
 	res = chmod(checkPath(fpath), mode);
-	writeI("chmod", fpath);
+	writeW("chmod", fpath);
 	if (res == -1) return -errno;
 	return 0;
 }
@@ -453,7 +456,7 @@ static int xmp_truncate(const char *path, off_t size)
 	int res;
 
 	res = truncate(checkPath(fpath), size);
-    	writeI("truncate", fpath);
+    	writeW("truncate", fpath);
 	if (res == -1) return -errno;
 	return 0;
 }
@@ -528,7 +531,7 @@ static int xmp_write(const char *path, const char *buf, size_t size,
 	res = pwrite(fd, buf, size, offset);
 	if (res == -1) res = -errno;
 
-    	writeI("write", fpath);
+    	writeW("write", fpath);
 	close(fd);
 	return res;
 }
@@ -564,20 +567,19 @@ static int xmp_create(const char* path, mode_t mode, struct fuse_file_info* fi)
 }
 
 
+static int xmp_release(const char *path, struct fuse_file_info *fi)
+{
+	(void) path;
+	(void) fi;
+	return 0;
+}
+
 
 static int xmp_fsync(const char *path, int isdatasync,
 		     struct fuse_file_info *fi)
 {
 	(void) path;
 	(void) isdatasync;
-	(void) fi;
-	return 0;
-}
-
-
-static int xmp_release(const char *path, struct fuse_file_info *fi)
-{
-	(void) path;
 	(void) fi;
 	return 0;
 }
