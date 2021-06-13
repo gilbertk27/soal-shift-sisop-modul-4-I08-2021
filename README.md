@@ -37,6 +37,7 @@ Then do the command to enter into the encryption function
 	}
 
 After that we modify xmp_rename. Where later, if previously there was the word "AtoZ_" in a folder and then the folder was renamed to no such word, it will be entered into the decrypt function. If the situation is reversed, it will be entered into the encrypt function. The contents of xmp_rename which signifies the previous statement are as follows:
+
 	int fromm = 0, too = 0;
 	char cek_substr[1024], cek2[1024];
    	if(lastPart(ffrom) == 0) return 0;
