@@ -47,19 +47,24 @@ All these <i>system call</i> is only to call the <i>system call</i> Linux by cha
   - `xmp_statfs()`: to do <b><i>stat</i></b> to <i>file</i> inputted.
 
 ```C
-static const char *dirpath = "/home/xyncz/Downloads";
+char directorypath[50] = "/home/xyncz/Downloads";
 ```
 
-Later, when <i>filesystem</i> being <i>mounted</i>, will have <i>root</i> from the `dirpath` . Then, <i>filesystem</i> will be editable to do operation according to user's will to answer Shift problem.
+Later, when <i>filesystem</i> being <i>mounted</i>, will have <i>root</i> from the `directorypath` . Then, <i>filesystem</i> will be editable to do operation according to user's will to answer Shift problem.
 
 
 ## PROBLEM 4 ##
 
 To make it easier to monitor activities on their filesystem, Sin and Sei created a log system with the following specifications.
+
 ####4a. The system log that will be created is named “SinSeiFS.log” in the user's home directory (/home/[user]/SinSeiFS.log). This system log maintains a list of system call commands that have been executed on the filesystem..
+
 ####4b. Because Sin and Sei like tidiness, the logs that are made will be divided into two levels,INFO and WARNING.
+
 ####4c. For the WARNING level log, it is used to log the rmdir and unlink syscalls.
+
 ####4d. The rest will be recorded at the INFO level.
+
 ####4e. The format for logging is: [Level]::[dd][mm][yyyy]-[HH]:[MM]:[SS]:[CMD]::[DESC :: DESC]
 
 
@@ -130,7 +135,7 @@ static int xmp_rmdir(const char *path)
 	if (res == -1) return -errno;
 	return 0;
 }
-```
+````
 	
 And there is a special function for warning that it differs only in char * info.
 
