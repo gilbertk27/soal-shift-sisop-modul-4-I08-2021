@@ -102,18 +102,19 @@ The alterations will occur when the two contradict state and encrypt function if
 		}
 
 After that, we have to create a log that records what this program does. That's why we created a Write function that will notify information and warnings and then store them in fs.log
-		void writeI(char *text, char* path)
-		{
-		char* info = "INFO";
-			char curtime[30];
-		time_t t = time(NULL);
-		struct tm* p1 = localtime(&t);
-			strftime(curtime, 30, "%y%m%d-%H:%M:%S", p1);
-		char log[1000];
-		sprintf(log, "%s::%s::%s::%s", info, curtime, text, path);
-			FILE *out = fopen("/home/xyncz/SinSeiFS.log", "a");  
-		fprintf(out, "%s\n", log);  
-		fclose(out); 
-		}
+
+			void writeI(char *text, char* path)
+			{
+			char* info = "INFO";
+				char curtime[30];
+			time_t t = time(NULL);
+			struct tm* p1 = localtime(&t);
+				strftime(curtime, 30, "%y%m%d-%H:%M:%S", p1);
+			char log[1000];
+			sprintf(log, "%s::%s::%s::%s", info, curtime, text, path);
+				FILE *out = fopen("/home/xyncz/SinSeiFS.log", "a");  
+			fprintf(out, "%s\n", log);  
+			fclose(out); 
+			}
 
 And there is a special function for warning that it differs only in char * info.
