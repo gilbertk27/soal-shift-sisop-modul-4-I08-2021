@@ -55,12 +55,9 @@ char *encrypt(char* str, bool cek)
 	int i, j, k = 0;
 	char *ext = strrchr(str, '.');
 	if(cek && ext != NULL) k = strlen(ext);
-	for(i = 0; i < strlen(str) - k; i++)
-	{
-			if(str[i]>='A'&&str[i]<='Z')
-   				str[i] ='Z'+'A'-str[i];
-   			if(str[i]>='a'&&str[i]<='z')
-				str[i]='z'+'a'-str[i];
+	for(i=0; i<strlen(str)-k; i++) {
+		if(str[i] >= 'A' && str[i] <= 'Z') str[i] = 'Z' + 'A' - str[i];
+		if(str[i] >= 'a' && str[i] <= 'z') str[i] = 'z' + 'a' - str[i];
 	}
 	return str;
 }
