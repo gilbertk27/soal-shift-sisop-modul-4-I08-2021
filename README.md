@@ -57,18 +57,20 @@ Later, when <i>filesystem</i> being <i>mounted</i>, will have <i>root</i> from t
 
 To make it easier to monitor activities on their filesystem, Sin and Sei created a log system with the following specifications.
 
-####4a. The system log that will be created is named “SinSeiFS.log” in the user's home directory (/home/[user]/SinSeiFS.log). This system log maintains a list of system call commands that have been executed on the filesystem..
+#### 4a. The system log that will be created is named “SinSeiFS.log” in the user's home directory (/home/[user]/SinSeiFS.log). This system log maintains a list of system call commands that have been executed on the filesystem..
 
-####4b. Because Sin and Sei like tidiness, the logs that are made will be divided into two levels,INFO and WARNING.
+#### 4b. Because Sin and Sei like tidiness, the logs that are made will be divided into two levels,INFO and WARNING.
 
-####4c. For the WARNING level log, it is used to log the rmdir and unlink syscalls.
+#### 4c. For the WARNING level log, it is used to log the rmdir and unlink syscalls.
 
-####4d. The rest will be recorded at the INFO level.
+#### 4d. The rest will be recorded at the INFO level.
 
-####4e. The format for logging is: [Level]::[dd][mm][yyyy]-[HH]:[MM]:[SS]:[CMD]::[DESC :: DESC]
+#### 4e. The format for logging is: [Level]::[dd][mm][yyyy]-[HH]:[MM]:[SS]:[CMD]::[DESC :: DESC]
 
 
 We have to create a log that records what this program does. That's why we created a 2 Write function (for INFO & Warning) that will notify information and warnings and then store them in SinSeiFS.log
+
+`INFO level`
 
 ````
 	void writeI(char *text, char* path)
@@ -87,7 +89,7 @@ We have to create a log that records what this program does. That's why we creat
 	}
 ````	
 
-
+`WARNING level`
 ````
 	void writeW(char *text, char* path)
 	{
@@ -104,10 +106,12 @@ We have to create a log that records what this program does. That's why we creat
 	}
 ````
 
+
+We also need to add the Warning level on the rmdir dan truncate. Beside that, all the other system call can use INFO level.
+
 `xmp_truncate function`
 	
 ````
-For the warning, we also need to add the Warning level on the rmdir dan truncate. Beside that, all the other system call can use INFO level.
 static int xmp_truncate(const char *path, off_t size)
 {
 	char fpath[1000];
@@ -140,7 +144,7 @@ static int xmp_rmdir(const char *path)
 And there is a special function for warning that it differs only in char * info.
 
 #### Result Image:
-| ![](/No4.png) |
+| ![](Image/No4.png) |
 |:--:| 
 | *No 4 result* |
 
