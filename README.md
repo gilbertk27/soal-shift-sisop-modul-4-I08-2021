@@ -6,8 +6,9 @@
 - After that, if an encrypted directory is renamed to unencrypted, the contents of that directory will be decrypted.
 
 Therefore, we create a command in xmp_mkdir which will send all the files to the encryption function :
-  static int xmp_mkdir(const char *path, mode_t mode)
-{
+
+  	static int xmp_mkdir(const char *path, mode_t mode)
+	{
 	char fpath[1000];
 	mixPath(fpath, directorypath, path);
 	
