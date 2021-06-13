@@ -68,6 +68,7 @@ where :
 The alterations will occur when the two contradict state and encrypt function if the parameters are both worth -1 then will decrypt
 
 - Encrypt 
+
 		char *encrypt(char* str, bool cek)
 		{
 		int i, j, k = 0;
@@ -84,6 +85,7 @@ The alterations will occur when the two contradict state and encrypt function if
 		}
 
 - Decrypt
+
 		char *encrypt(char* str, bool cek)
 		{
 		int i, j, k = 0;
